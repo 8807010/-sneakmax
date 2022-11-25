@@ -112,7 +112,6 @@ a {
   gap: var(--grid-gap);
 }
 
-
 .btn {
   border-radius: 4px;
   padding: 22px 47px;
@@ -125,6 +124,15 @@ a {
 
     &:hover {
       background-color: var(--color-accent-hover);
+    }
+  }
+
+  &--secondary {
+    color: var(--color-white);
+    background-color: var(--color-main);
+
+    &:hover {
+      background-color: var(--color-main-hover);
     }
   }
 }
