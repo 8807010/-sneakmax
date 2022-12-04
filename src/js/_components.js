@@ -3,3 +3,4 @@ import './components/quiz';
 import './components/faq';
 // import './components/insta';
 import './components/map';
+import './components/products';
