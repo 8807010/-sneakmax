@@ -1,5 +1,5 @@
-import GraphModal from './../vendor/graph-modal.min';
 import Swiper from 'swiper';
+import GraphModal from './../vendor/graph-modal.min';
 
 const catalogList = document.querySelector('.catalog-list');
 const catalogMore = document.querySelector('.catalog__more');
