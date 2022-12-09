@@ -36,8 +36,6 @@
     justify-content: flex-end;
     grid-column: 10 span;
 
-    grid-column: 10 span;
-
     @include mobile {
       grid-column: 2 span;
     }
