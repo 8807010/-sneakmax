@@ -147,6 +147,6 @@
   }
 
   @include mobile {
-    width: 290px;
+    width: calc(100vw - 30px);
   }
 }
