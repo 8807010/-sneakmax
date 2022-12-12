@@ -27,7 +27,6 @@ let validateForms = function (selector, rules, messages, successModal, yaGoal) {
 
         productsFormData.append(`summ`, `${document.querySelector('.cart-modal-order__summ span').textContent}`);
 
-
         let xhr = new XMLHttpRequest();
 
         xhr.onreadystatechange = function () {
@@ -60,7 +59,6 @@ let validateForms = function (selector, rules, messages, successModal, yaGoal) {
 
         form.reset();
       }
-
     }
   });
 }
