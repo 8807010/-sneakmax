@@ -5,3 +5,4 @@ import './components/faq';
 import './components/map';
 import './components/products';
 import './components/cart';
+import './components/burger';
