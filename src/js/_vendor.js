@@ -5,3 +5,5 @@ import './vendor/clamp.min';
 import './vendor/swiper.min';
 import './vendor/simplebar.min';
 import './vendor/graph-modal.min';
+import './vendor/just-validate.min';
+import './vendor/inputmask.min';

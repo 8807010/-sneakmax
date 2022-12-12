@@ -33,7 +33,6 @@ if (catalogList) {
         for (let i = 0; i < dataLength; i++) {
           if (i < quantity) {
             let item = data[i];
-            console.log(item)
             catalogList.innerHTML += `
               <li class="catalog-list__item">
                 <article class="product">
@@ -69,7 +68,6 @@ if (catalogList) {
         const productsBtns = document.querySelectorAll('.product__btn');
 
         productsBtns.forEach(el => {
-          console.log(el)
           el.addEventListener('focus', (e) => {
             let parent = e.currentTarget.closest('.product__btns');
             console.log(parent)
@@ -371,7 +369,6 @@ orderModalList.addEventListener('click', (e) => {
 
     setTimeout(() => {
       let num = document.querySelectorAll('.cart-modal-order__list .mini-cart__item').length;
-      console.log(num)
 
       if (num == 0) {
         cartCount.classList.remove('cart__count--visible');

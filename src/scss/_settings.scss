@@ -308,5 +308,12 @@ a {
 }
 
 .form-label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
   width: 100%;
+}
+
+.js-validate-error-label {
+  order: -1;
 }
