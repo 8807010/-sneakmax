@@ -1,6 +1,3 @@
-import Swiper from 'swiper';
-import GraphModal from './../vendor/graph-modal.min';
-
 const catalogList = document.querySelector('.catalog-list');
 const catalogMore = document.querySelector('.catalog__more');
 const prodModal = document.querySelector('[data-graph-target="prod-modal"] .modal-content');
@@ -17,10 +14,12 @@ let modal = null;
 const normalPrice = (str) => {
   return String(str).replace(/(\d)(?=(\d\d\d)+([^\d]|$))/g, '$1 ');
 };
+
 const prodSlider = new Swiper('.modal-slider__container', {
   slidesPerView: 1,
   spaceBetween: 20
 });
+
 if (catalogList) {
   const loadProducts = (quantity = 5) => {
     fetch('../data/data.json')
@@ -33,6 +32,7 @@ if (catalogList) {
         for (let i = 0; i < dataLength; i++) {
           if (i < quantity) {
             let item = data[i];
+            console.log(item)
             catalogList.innerHTML += `
               <li class="catalog-list__item">
                 <article class="product">
@@ -48,14 +48,14 @@ if (catalogList) {
                         <svg>
                           <use xlink:href="img/sprite.svg#cart"></use>
                         </svg>
-                        </button>
-                        </div>
-                      </div>
-                      <h3 class="product__title">${item.title}</h3>
-                      <span class="product__price">${normalPrice(item.price)} р</span>
-                    </article>
-                  </li>
-                `;
+                      </button>
+                    </div>
+                  </div>
+                  <h3 class="product__title">${item.title}</h3>
+                  <span class="product__price">${normalPrice(item.price)} р</span>
+                </article>
+              </li>
+            `;
           }
         }
       })
@@ -68,6 +68,7 @@ if (catalogList) {
         const productsBtns = document.querySelectorAll('.product__btn');
 
         productsBtns.forEach(el => {
+          console.log(el)
           el.addEventListener('focus', (e) => {
             let parent = e.currentTarget.closest('.product__btns');
             console.log(parent)
@@ -87,16 +88,14 @@ if (catalogList) {
           isOpen: (modal) => {
             if (modal.modalContainer.classList.contains('prod-modal')) {
               const openBtnId = modal.previousActiveElement.dataset.id;
-
               loadModalData(openBtnId);
-
               prodSlider.update();
             }
           },
         });
-
       });
   };
+
   loadProducts(prodQuantity);
   const loadModalData = (id = 1) => {
     fetch('../data/data.json')
@@ -192,6 +191,7 @@ if (catalogList) {
         });
       });
   };
+
   catalogMore.addEventListener('click', (e) => {
     prodQuantity = prodQuantity + 3;
     loadProducts(prodQuantity);
@@ -204,12 +204,10 @@ if (catalogList) {
 }
 
 // работа корзины
-
 let price = 0;
 const miniCartList = document.querySelector('.mini-cart__list');
 const fullPrice = document.querySelector('.mini-cart__summ');
 const cartCount = document.querySelector('.cart__count');
-
 const priceWithoutSpaces = (str) => {
   return str.replace(/\s/g, '');
 };
@@ -260,7 +258,6 @@ const loadCartData = (id = 1) => {
                 </article>
               </li>
             `);
-
           return dataItem;
         }
       }
@@ -268,20 +265,16 @@ const loadCartData = (id = 1) => {
     .then((item) => {
       plusFullPrice(item.price);
       printFullPrice();
-
       let num = document.querySelectorAll('.mini-cart__list .mini-cart__item').length;
-
       if (num > 0) {
         cartCount.classList.add('cart__count--visible');
       }
-
       printQuantity(num);
     });
 };
 
 const cartLogic = () => {
   const productBtn = document.querySelectorAll('.add-to-cart-btn');
-
   productBtn.forEach(el => {
     el.addEventListener('click', (e) => {
       const id = e.currentTarget.dataset.id;
@@ -299,18 +292,12 @@ const cartLogic = () => {
       const parent = self.closest('.mini-cart__item');
       const price = parseInt(priceWithoutSpaces(parent.querySelector('.mini-product__price').textContent));
       const id = parent.dataset.id;
-
       console.log(document.querySelector(`.product__btn[data-id="${id}"]`))
-
       document.querySelector(`.add-to-cart-btn[data-id="${id}"]`).classList.remove('product__btn--disabled');
-
       parent.remove();
-
       minusFullPrice(price);
       printFullPrice();
-
       let num = document.querySelectorAll('.mini-cart__list .mini-cart__item').length;
-
       if (num == 0) {
         cartCount.classList.remove('cart__count--visible');
         miniCart.classList.remove('mini-cart--visible');
@@ -327,17 +314,13 @@ const orderModalList = document.querySelector('.cart-modal-order__list');
 const orderModalQuantity = document.querySelector('.cart-modal-order__quantity span');
 const orderModalSumm = document.querySelector('.cart-modal-order__summ span');
 const orderModalShow = document.querySelector('.cart-modal-order__show');
-
 openOrderModal.addEventListener('click', () => {
   const productsHtml = document.querySelector('.mini-cart__list').innerHTML;
   orderModalList.innerHTML = productsHtml;
-
   orderModalQuantity.textContent = `${document.querySelectorAll('.mini-cart__list .mini-cart__item').length} шт`;
   orderModalSumm.textContent = fullPrice.textContent;
 });
-
 orderModalShow.addEventListener('click', () => {
-
   if (orderModalList.classList.contains('cart-modal-order__list--visible')) {
     orderModalList.classList.remove('cart-modal-order__list--visible');
     orderModalShow.classList.remove('cart-modal-order__show--active');
@@ -347,12 +330,17 @@ orderModalShow.addEventListener('click', () => {
   }
 });
 
+// ДОДЕЛАТЬ УДАЛЕНИЕ ИЗ МОДАЛКИ
+
 orderModalList.addEventListener('click', (e) => {
   if (e.target.classList.contains('mini-product__delete')) {
+    console.log('asd')
     const self = e.target;
     const parent = self.closest('.mini-cart__item');
     const price = parseInt(priceWithoutSpaces(parent.querySelector('.mini-product__price').textContent));
     const id = parent.dataset.id;
+
+    console.log(document.querySelector(`.product__btn[data-id="${id}"]`))
 
     document.querySelector(`.add-to-cart-btn[data-id="${id}"]`).classList.remove('product__btn--disabled');
 
@@ -369,7 +357,7 @@ orderModalList.addEventListener('click', (e) => {
 
     setTimeout(() => {
       let num = document.querySelectorAll('.cart-modal-order__list .mini-cart__item').length;
-
+      console.log(num)
       if (num == 0) {
         cartCount.classList.remove('cart__count--visible');
         miniCart.classList.remove('mini-cart--visible');
