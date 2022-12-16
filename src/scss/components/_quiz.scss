@@ -68,7 +68,7 @@
     padding-bottom: var(--main-offset);
     gap: var(--second-offset) 70px;
 
-    @include small-tablet {
+    @include tablet {
       gap: var(--second-offset);
     }
 

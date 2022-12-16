@@ -76,6 +76,7 @@
 
 .catalog-list {
   grid-template-columns: repeat(9, 1fr);
+  min-height: 733px;
 
   &__item {
     grid-column: 3 span;
